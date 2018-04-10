@@ -20,7 +20,7 @@ class Time extends Component {
 
     clock() {
         this.setState((prevState, props) => ({
-            date: new Moment().diff()
+            date: new Moment().diff(props.date)
             // date: new Moment().diff(props.date.add(40, "seconds"))
         }));
     }
