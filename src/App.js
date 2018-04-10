@@ -1,13 +1,14 @@
 import React, { Component } from "react";
+import * as Moment from "moment";
 import logo from "./logo.svg";
 import "./App.css";
 
-const startDate = new Date();
+const startDate = new Moment();
 
 class Time extends Component {
     constructor(props) {
         super(props);
-        this.state = { date: new Date() };
+        this.state = { date: new Moment().diff(props.date) };
     }
     componentDidMount() {
         this.timeId = setInterval(() => this.clock(), 1000);
@@ -19,17 +20,17 @@ class Time extends Component {
 
     clock() {
         this.setState((prevState, props) => ({
-            date: new Date()
+            date: new Moment().diff()
+            // date: new Moment().diff(props.date.add(40, "seconds"))
         }));
     }
     render() {
         return (
             <p>
                 {" "}
-                We start at
-                <b> {this.props.date.toLocaleString()} </b>
-                and now are
-                <b> {this.state.date.toLocaleString()} </b>
+                we are
+                <b> {Moment.duration(this.state.date).humanize()} </b>
+                without AngularJs
             </p>
         );
     }
@@ -44,9 +45,6 @@ class App extends Component {
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
                 <Time date={startDate} />
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
             </div>
         );
     }
