@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import * as Moment from "moment";
+import GridLayout from 'react-grid-layout';
 import logo from "./logo.svg";
 import "./App.css";
+import "../node_modules/react-grid-layout/css/styles.css";
+import "../node_modules/react-resizable/css/styles.css";
 
 const startDate = new Moment();
 
@@ -36,6 +39,34 @@ class Time extends Component {
     }
 }
 
+class Grid extends Component {
+    render() {
+      var layout = [
+        {i: 'grid1', x: 0, y: 0, w: 1, h: 1},
+        {i: 'grid2', x: 0, y: 0, w: 1, h: 1}
+      ];
+      return (
+        <GridLayout 
+            className="grid" 
+            layout={layout} 
+            cols={12}
+            margin={[10,10]}
+            preventCollision={true}
+        >
+          <div key="item1" 
+            className="item" 
+            >
+              <Time date={startDate} />
+          </div>
+          <div key="item2"
+            className="item" 
+            >
+              <Time date={startDate} />
+          </div>
+        </GridLayout>
+      )
+    }
+  }
 class App extends Component {
     render() {
         return (
@@ -44,7 +75,7 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <Time date={startDate} />
+                <Grid/>
             </div>
         );
     }
