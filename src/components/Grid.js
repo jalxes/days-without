@@ -5,6 +5,7 @@ import "../../node_modules/react-grid-layout/css/styles.css";
 import "../../node_modules/react-resizable/css/styles.css";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import Time from "./Time";
+import Card from "./Card";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -22,7 +23,7 @@ class Grid extends React.Component {
             currentBreakpoint: "lg",
             compactType: "vertical",
             mounted: false,
-            layouts: { lg: this.generateLayout() }
+            layouts: this.generateLayout()
         };
     }
 
@@ -38,10 +39,10 @@ class Grid extends React.Component {
         });
     }
 
-    generateDOM() {
-        return _.map(this.state.layouts.lg, function(l, i) {
+    getCards(layout) {
+        return layout.map((item, i) => {
             return (
-                <div key={i} className="{l.static ? 'static' : ''} item">
+                <div key={i} data-grid={item} className="{l.static ? 'static' : ''} item">
                     <span className="text">{i}</span>
                     <Time />
                 </div>
@@ -49,16 +50,24 @@ class Grid extends React.Component {
         });
     }
 
+    // getCards(layout) {
+    //     return layout.map((item, i) => {
+    //         return <Card key={i} id={i} data-grid={item} />;
+    //     });
+    // }
+
     render() {
+        const { layouts } = this.state;
+        // console.log(this.getCards(layouts));
         return (
             <ResponsiveGridLayout
                 {...this.props}
                 className="layout"
-                layouts={this.state.layouts}
+                layouts={layouts}
                 margin={[25, 25]}
                 preventCollision={true}
             >
-                {this.generateDOM()}
+                {this.getCards(layouts)}
             </ResponsiveGridLayout>
         );
     }

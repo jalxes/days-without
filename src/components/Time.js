@@ -3,12 +3,13 @@ import * as Moment from "moment";
 
 class Time extends React.Component {
     static defaultProps = {
-        date: new Moment(),
-        text: "without AngularJs"
+        date: new Moment()
     };
     constructor(props) {
         super(props);
-        this.state = { date: new Moment().diff(props.date) };
+        this.state = {
+            date: new Moment().diff(props.date)
+        };
     }
     componentDidMount() {
         this.timeId = setInterval(() => this.clock(), 1000);
@@ -25,14 +26,7 @@ class Time extends React.Component {
         }));
     }
     render() {
-        return (
-            <p>
-                {" "}
-                we are
-                <b> {Moment.duration(this.state.date).humanize()} </b>
-                without {this.props.text}
-            </p>
-        );
+        return <b> {Moment.duration(this.state.date).humanize()} </b>;
     }
 }
 
