@@ -1,14 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import * as Moment from "moment";
-import GridLayout from 'react-grid-layout';
+import _ from "lodash";
 import logo from "./logo.svg";
 import "./App.css";
 import "../node_modules/react-grid-layout/css/styles.css";
 import "../node_modules/react-resizable/css/styles.css";
+import { Responsive, WidthProvider } from "react-grid-layout";
 
+const ResponsiveGridLayout = WidthProvider(Responsive);
 const startDate = new Moment();
 
-class Time extends Component {
+class Time extends React.Component {
+    static defaultProps = {
+        date: startDate,
+        text: "without AngularJs"
+    }
     constructor(props) {
         super(props);
         this.state = { date: new Moment().diff(props.date) };
@@ -33,41 +39,70 @@ class Time extends Component {
                 {" "}
                 we are
                 <b> {Moment.duration(this.state.date).humanize()} </b>
-                without AngularJs
+                without {this.props.text}
             </p>
         );
     }
 }
 
-class Grid extends Component {
-    render() {
-      var layout = [
-        {i: 'grid1', x: 0, y: 0, w: 1, h: 1},
-        {i: 'grid2', x: 0, y: 0, w: 1, h: 1}
-      ];
-      return (
-        <GridLayout 
-            className="grid" 
-            layout={layout} 
-            cols={12}
-            margin={[10,10]}
-            preventCollision={true}
-        >
-          <div key="item1" 
-            className="item" 
-            >
-              <Time date={startDate} />
-          </div>
-          <div key="item2"
-            className="item" 
-            >
-              <Time date={startDate} />
-          </div>
-        </GridLayout>
-      )
+class Grid extends React.Component {
+    static defaultProps = {
+        className: "layout",
+        rowHeight: 30,
+        breakpoints:{ xxlg: 1670, lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
+        cols:{ xxlg: 5, lg: 4, md: 3, sm: 2, xs: 2, xxs: 1 },
+        onLayoutChange: function() {},
+    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Moment().diff(props.date),
+            currentBreakpoint: "lg",
+            compactType: "vertical",
+            mounted: false,
+            layouts: { lg: this.generateLayout() }
+        };
     }
-  }
-class App extends Component {
+
+    generateLayout() {
+        return _.map(_.range(0, 25), function(item, i) {
+          return {
+            x: _.random(0, 4),
+            y: 1,
+            w: 1,
+            h: 3,
+            i: i.toString(),
+          };
+        });
+    }
+
+    generateDOM() {
+        return _.map(this.state.layouts.lg, function(l, i) {
+            return (
+                <div key={i} className="{l.static ? 'static' : ''} item">
+                    <span className="text">{i}</span>
+                    <Time date={startDate} />
+                </div>
+            );
+        });
+    }
+
+    render() {
+        return (
+            <ResponsiveGridLayout
+                {...this.props}    
+                className="layout"
+                layouts={this.state.layouts}
+                
+                margin={[25, 25]}
+                preventCollision={true}
+            >
+                {this.generateDOM()}
+            </ResponsiveGridLayout>
+        );
+    }
+}
+class App extends React.Component {
     render() {
         return (
             <div className="App">
@@ -75,7 +110,7 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <Grid/>
+                <Grid />
             </div>
         );
     }
