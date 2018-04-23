@@ -1,7 +1,9 @@
 import React from "react";
 import _ from "lodash";
 import "./Grid.css";
+import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import Time from "./Time";
+import { Card as AntCard } from "antd";
 
 class Card extends React.Component {
     constructor(props) {
@@ -12,22 +14,14 @@ class Card extends React.Component {
     }
 
     render() {
-        const i = this.props.id;
+        const i = this.props.gridLayout.i;
         return (
-            <div
-                key={i}
-                data-grid={{
-                    x: _.random(0, 4),
-                    y: 1,
-                    w: 1,
-                    h: 3,
-                    i: i.toString()
-                }}
-                className="{l.static ? 'static' : ''} item"
-            >
-                <span className="text">{i}</span>
-                <Time />
-            </div>
+            <AntCard title={i}>
+                <p>
+                    <Time />
+                    {this.state.value}
+                </p>
+            </AntCard>
         );
     }
 }

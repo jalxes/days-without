@@ -4,7 +4,6 @@ import "./Grid.css";
 import "../../node_modules/react-grid-layout/css/styles.css";
 import "../../node_modules/react-resizable/css/styles.css";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import Time from "./Time";
 import Card from "./Card";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -23,7 +22,7 @@ class Grid extends React.Component {
             currentBreakpoint: "lg",
             compactType: "vertical",
             mounted: false,
-            layouts: this.generateLayout()
+            layouts: { lg: this.generateLayout() }
         };
     }
 
@@ -39,23 +38,6 @@ class Grid extends React.Component {
         });
     }
 
-    getCards(layout) {
-        return layout.map((item, i) => {
-            return (
-                <div key={i} data-grid={item} className="{l.static ? 'static' : ''} item">
-                    <span className="text">{i}</span>
-                    <Time />
-                </div>
-            );
-        });
-    }
-
-    // getCards(layout) {
-    //     return layout.map((item, i) => {
-    //         return <Card key={i} id={i} data-grid={item} />;
-    //     });
-    // }
-
     render() {
         const { layouts } = this.state;
         // console.log(this.getCards(layouts));
@@ -67,7 +49,13 @@ class Grid extends React.Component {
                 margin={[25, 25]}
                 preventCollision={true}
             >
-                {this.getCards(layouts)}
+                {layouts.lg.map((item, i) => {
+                    return (
+                        <div key={i}>
+                            <Card gridLayout={item} />
+                        </div>
+                    );
+                })}
             </ResponsiveGridLayout>
         );
     }
