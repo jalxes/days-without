@@ -47,7 +47,8 @@ class Grid extends React.Component {
                 className="layout"
                 layouts={layouts}
                 margin={[25, 25]}
-                preventCollision={true}
+                draggableHandle=".ant-card-head"
+                draggableCancel=".ant-card-body"
             >
                 {layouts.lg.map((item, i) => {
                     return (
