@@ -1,14 +1,14 @@
 .ant-card {
-    color: rgba(168, 66, 151) !important;
     border-radius: 20px !important;
 }
 .ant-card-head {
     background-color: rgba(245, 216, 216) !important;
     border-radius: 20px 20px 0 0 !important;
+    border-bottom: 2px dashed #ffb3b3 !important;
 }
 
 .ant-card-body {
-    background-color: rgba(226, 187, 187) !important;
+    background-color: rgba(245, 216, 216) !important;
     color: rgba(168, 66, 151);
     border-radius: 0 0 20px 20px !important;
 }
