@@ -1,7 +1,6 @@
 import React from "react";
 import _ from "lodash";
 import "./Grid.css";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import Time from "./Time";
 import { Card as AntCard } from "antd";
 

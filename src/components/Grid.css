@@ -1,14 +1,16 @@
 .ant-card {
-    border-radius: 10px !important;
+    border-radius: 10px;
+    background-color: #ffd9e8;
 }
 .ant-card-head {
-    background-color: rgba(245, 216, 216) !important;
-    border-radius: 10px 10px 0 0 !important;
-    border-bottom: 2px dashed #ffb3b3 !important;
+    border-radius: 10px 10px 0 0;
+    background-color: #ffd9e8;
+    border-bottom: 2px dashed #4a266a;
 }
-
+.ant-card-head-title {
+    color: #4a266a;
+}
 .ant-card-body {
-    background-color: rgba(245, 216, 216) !important;
-    color: rgba(168, 66, 151);
-    border-radius: 0 0 10px 10px !important;
+    color: #4a266a;
+    border-radius: 0 0 10px 10px;
 }
