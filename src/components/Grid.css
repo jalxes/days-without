@@ -1,0 +1,16 @@
+.ant-card {
+    border-radius: 10px;
+    background-color: #ffd9e8;
+}
+.ant-card-head {
+    border-radius: 10px 10px 0 0;
+    background-color: #ffd9e8;
+    border-bottom: 2px dashed #4a266a;
+}
+.ant-card-head-title {
+    color: #4a266a;
+}
+.ant-card-body {
+    color: #4a266a;
+    border-radius: 0 0 10px 10px;
+}

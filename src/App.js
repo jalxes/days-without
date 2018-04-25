@@ -1,50 +1,16 @@
-import React, { Component } from "react";
-import * as Moment from "moment";
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 
-const startDate = new Moment();
+import Grid from "./components/Grid";
 
-class Time extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { date: new Moment().diff(props.date) };
-    }
-    componentDidMount() {
-        this.timeId = setInterval(() => this.clock(), 1000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timeId);
-    }
-
-    clock() {
-        this.setState((prevState, props) => ({
-            date: new Moment().diff(props.date)
-            // date: new Moment().diff(props.date.add(40, "seconds"))
-        }));
-    }
-    render() {
-        return (
-            <p>
-                {" "}
-                we are
-                <b> {Moment.duration(this.state.date).humanize()} </b>
-                without AngularJs
-            </p>
-        );
-    }
-}
-
-class App extends Component {
+class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <Time date={startDate} />
+                {/* <header className="App-header">
+                    <h1 className="App-title">Days Without</h1>
+                </header> */}
+                <Grid />
             </div>
         );
     }
