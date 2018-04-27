@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import "./Grid.css";
+import "./Card.css";
 import "../../node_modules/react-grid-layout/css/styles.css";
 import "../../node_modules/react-resizable/css/styles.css";
 import { Responsive, WidthProvider } from "react-grid-layout";

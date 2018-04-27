@@ -14,3 +14,16 @@
     color: #4a266a;
     border-radius: 0 0 10px 10px;
 }
+
+.ant-card-body p {
+    color: #4a266a;
+    border-radius: 0 0 10px 10px;
+    text-align: left;
+}
+
+.ant-card-body .anticon {
+    margin-left: auto;
+    float: right;
+    padding: 0 0 0 17.5px;
+    text-align: right;
+}
