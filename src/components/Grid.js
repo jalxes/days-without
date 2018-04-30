@@ -32,7 +32,7 @@ class Grid extends React.Component {
                 x: _.random(0, 4),
                 y: 1,
                 w: 1,
-                h: 3,
+                h: 4,
                 i: i.toString()
             };
         });

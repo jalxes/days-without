@@ -1,9 +1,9 @@
 import React from "react";
 import _ from "lodash";
 import "./Card.css";
-import "../assets/pencil.svg";
 import Time from "./Time";
 import { Card as AntCard, Icon, Input } from "antd";
+const { TextArea } = Input;
 class Card extends React.Component {
     constructor(props) {
         super(props);
@@ -24,19 +24,19 @@ class Card extends React.Component {
     };
 
     render() {
-        const i = this.props.gridLayout.i;
-        const text = this.state.isEditing ? (
-            <Input defaultValue={this.state.value} onChange={this.handleChange} />
-        ) : (
-            this.state.value
-        );
-        const icon = this.state.isEditing ? <Icon type="check" /> : <Icon type="edit" />;
+        const i = <a onClick={this.openItem}>{this.props.gridLayout.i}</a>;
+        const isEditing = this.state.isEditing;
         return (
             <AntCard title={i} extra={<Icon type="close" />}>
-                <a onClick={this.changeTextInput}>{icon}</a>
                 <p>
                     <Time />
-                    {text}
+                    <TextArea
+                        defaultValue={this.state.value}
+                        onChange={this.handleChange}
+                        onFocus={this.changeTextInput}
+                        onBlur={this.changeTextInput}
+                        readOnly={!isEditing}
+                    />
                 </p>
             </AntCard>
         );
