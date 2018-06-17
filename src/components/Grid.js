@@ -14,7 +14,7 @@ class Grid extends React.Component {
         rowHeight: 30,
         breakpoints: { xxlg: 1670, lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 },
         cols: { xxlg: 5, lg: 4, md: 3, sm: 2, xs: 2, xxs: 1 },
-        onLayoutChange: function() {}
+        onLayoutChange: function () { }
     };
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ class Grid extends React.Component {
     }
 
     generateLayout() {
-        return _.map(_.range(0, 25), function(item, i) {
+        return _.map(_.range(0, 25), function (i) {
             return {
                 x: _.random(0, 4),
                 y: 1,

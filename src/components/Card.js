@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 import "./Card.css";
 import Time from "./Time";
 import { Card as AntCard, Icon, Input } from "antd";
@@ -9,12 +8,37 @@ class Card extends React.Component {
         super(props);
         this.state = {
             isEditing: false,
-            value: "without that stuff"
+            value: this.getFromLS('cardValue' + props.gridLayout.i)
         };
+    }
+    getFromLS(key) {
+        let ls = {};
+        if (global.localStorage) {
+            try {
+                ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+            } catch (e) {
+                /*Ignore*/
+            }
+        }
+        return ls[key];
+    }
+
+    saveToLS(key, value) {
+        let ls = {};
+        if (global.localStorage) {
+            ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+            ls[key] = value;
+
+            global.localStorage.setItem(
+                "rgl-8",
+                JSON.stringify(ls)
+            );
+        }
     }
 
     handleChange = event => {
         this.setState({ value: event.target.value });
+        this.saveToLS('cardValue' + this.props.gridLayout.i, event.target.value)
     };
 
     changeTextInput = () => {
